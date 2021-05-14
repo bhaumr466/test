@@ -2,7 +2,7 @@ module "iam" {
     source  = "terraform-aws-modules/iam/aws//modules/iam-assumable-role"
   version = "3.6.0"
 
-  name                 = "jenkins_iam"
+  #name                 = "jenkins_iam"
   role_name               = "jenkins-test"
   create_role             = true
   force_detach_policies   = true
