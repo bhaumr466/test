@@ -3,7 +3,7 @@ module "security_group" {
   version = "~> 3.0"
   name = default-jenkins
   description = jenkins-group
-  ingress_with_cidr_blocks = 0.0.0.0
+  ingress_with_cidr_blocks = "0.0.0.0/16"
   #vpc_id = var.vpc_id
   #egress_cidr_blocks = var.egress_cidr_blocks
   #egress_rules = var.egress_rules
