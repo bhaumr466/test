@@ -10,7 +10,7 @@ module "ec2" {
   associate_public_ip_address = true
   key_name                    = "jenkintest"
   #user_data                   = file("${path.root}/scripts/${var.user_data}")
-  iam_instance_profile        = "jenkins"
+  iam_instance_profile        = "jenkins_iam"
   disable_api_termination     = true
 
   root_block_device = [
