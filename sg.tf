@@ -1,7 +1,7 @@
 module "security_group" {
   source = "terraform-aws-modules/security-group/aws"
   version = "~> 3.0"
-  #name = default
+  name = jenkins-test
   #description = jenkins-group
   #ingress_with_cidr_blocks = ["0.0.0.0/0"]
   vpc_id = module.vpc.vpc_id
