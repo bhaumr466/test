@@ -15,7 +15,7 @@ module "ec2" {
 
   root_block_device = [
     {
-      volume_type = gp2
+      volume_type = "gp2"
       volume_size = 50
     },
   ]
