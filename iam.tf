@@ -3,7 +3,7 @@ module "iam" {
   version = "3.6.0"
 
   name                 = "jenkins_iam"
-  role_name               = "jenkins-role"
+  role_name               = "jenkins-test"
   create_role             = true
   force_detach_policies   = true
   #custom_role_policy_arns = [module.bastion_iam_policy.arn]
