@@ -5,7 +5,7 @@ module "ec2" {
   instance_count              = 1
   ami                         = "ami-0b850cf02cc00fdc8"
   instance_type               = "t2.micro"
-  vpc_security_group_ids      = module.jenkins_security_group
+  vpc_security_group_ids      = [module.jenkins_security_group]
   subnet_id                   = module.vpc.public_subnets[0]
   associate_public_ip_address = true
   key_name                    = "jenkins-test"
