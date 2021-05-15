@@ -4,8 +4,8 @@ module "jenkins_security_group" {
   name = "jenkins_security_group"
   description = "jenkins inbound"
   vpc_id             = module.vpc.vpc_id
-  egress_cidr_blocks = "0.0.0.0/0"
-  egress_rules       = [all-all]
+  egress_cidr_blocks = ["0.0.0.0/0"]
+  egress_rules       = ["all-all"]
   ingress_with_cidr_blocks = [
     { 
       from_port   = "22"
