@@ -4,9 +4,9 @@ provider "aws" {
 
 data "aws_availability_zones" "available" {}
 
-locals {
-  cluster_name = "eu-central-1-eks-dev"
-}
+# locals {
+#   cluster_name = "eu-central-1-eks-dev"
+# }
 
 resource "random_string" "suffix" {
   length  = 8
