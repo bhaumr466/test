@@ -1,10 +1,10 @@
 module "jenkins_security_group" {
   source = "terraform-aws-modules/security-group/aws"
-  version = "~> 3.0"
-  name = "jenkins_security_group"
+  version = "~> 4.0"
+  name = "jenkins_sg"
   description = "jenkins inbound"
   vpc_id             = module.vpc.vpc_id
-  egress_cidr_blocks = ["0.0.0.0/0"]
+  #egress_cidr_blocks = ["0.0.0.0/0"]
   egress_rules       = ["all-all"]
   ingress_cidr_blocks = ["0.0.0.0/0"]
   ingress_rules      = ["all-all"] 
@@ -34,8 +34,9 @@ module "ec2" {
   instance_count              = 1
   ami                         = "ami-0b850cf02cc00fdc8"
   instance_type               = "t2.micro"
-  #vpc_security_group_ids      = "${module.vpc.jenkins_security_group.jenkins_security_group_id}"
-  vpc_security_group_ids      = [module.vpc.default_security_group_id]
+  vpc_security_group_ids      = [module.jenkins_security_group.jenkins_security_group_id]
+  #vpc_security_group_ids      = [module.vpc.default_security_group_id]
+  
   subnet_id                   = module.vpc.public_subnets[0]
   associate_public_ip_address = true
   key_name                    = "jenkins-test"
