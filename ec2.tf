@@ -1,4 +1,4 @@
-module "jenkins_security_group" {
+module "jsg" {
   source = "terraform-aws-modules/security-group/aws"
   version = "~> 4.0"
   name = "jenkins_sg"
@@ -34,7 +34,7 @@ module "ec2" {
   instance_count              = 1
   ami                         = "ami-0b850cf02cc00fdc8"
   instance_type               = "t2.micro"
-  vpc_security_group_ids      = [module.jenkins_security_group.jenkins_security_group_id]
+  vpc_security_group_ids      = [module.jsg.jsg_id]
   #vpc_security_group_ids      = [module.vpc.default_security_group_id]
   
   subnet_id                   = module.vpc.public_subnets[0]
