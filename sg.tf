@@ -6,12 +6,6 @@ module "jenkins_security_group" {
   vpc_id             = module.vpc.vpc_id
   egress_cidr_blocks = ["0.0.0.0/0"]
   egress_rules       = ["all-all"]
-  ingress_with_cidr_blocks = [
-    { 
-      from_port   = "22"
-      to_port     = "80"
-      protocol    = "tcp"
-      description = "jenkins port"
-      cidr_blocks = "0.0.0.0/0"
-  }, ]
+  ingress_with_cidr_blocks = ["0.0.0.0/0"]
+  ingress_rules      = ["all-all"] 
 }
