@@ -34,7 +34,7 @@ module "ec2" {
   instance_count              = 1
   ami                         = "ami-0b850cf02cc00fdc8"
   instance_type               = "t2.micro"
-  vpc_security_group_ids      = [module.jsg.jsg_id]
+  vpc_security_group_ids      = [module.jsg.jsg_name]
   #vpc_security_group_ids      = [module.vpc.default_security_group_id]
   
   subnet_id                   = module.vpc.public_subnets[0]
@@ -42,7 +42,7 @@ module "ec2" {
   key_name                    = "jenkins-test"
   #user_data                   = file("${path.root}/scripts/${var.user_data}")
   #iam_instance_profile        = "jenkins_iam"
-  disable_api_termination     = true
+  disable_api_termination     = false
 
   root_block_device = [
     {
