@@ -11,7 +11,7 @@
 # }
 
 resource "aws_security_group" "jenkins-sg" {
-  name = "${jenkins.name.id}-sg"
+  name = "jenkins-sg"
   ingress {
     from_port   = 22
     to_port     = 80
