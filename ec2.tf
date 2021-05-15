@@ -1,31 +1,31 @@
-# module "jenkins_security_group" {
-#   source = "terraform-aws-modules/security-group/aws"
-#   version = "~> 3.0"
-#   name = "jenkins_security_group"
-#   description = "jenkins inbound"
-#   vpc_id             = module.vpc.vpc_id
-#   egress_cidr_blocks = ["0.0.0.0/0"]
-#   egress_rules       = ["all-all"]
-#   ingress_cidr_blocks = ["0.0.0.0/0"]
-#   ingress_rules      = ["all-all"] 
-# }
-
-resource "aws_security_group" "jenkins-sg" {
-  name = "jenkins-sg"
-  ingress {
-    from_port   = 22
-    to_port     = 80
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
+module "jenkins_security_group" {
+  source = "terraform-aws-modules/security-group/aws"
+  version = "~> 3.0"
+  name = "jenkins_security_group"
+  description = "jenkins inbound"
+  vpc_id             = module.vpc.vpc_id
+  egress_cidr_blocks = ["0.0.0.0/0"]
+  egress_rules       = ["all-all"]
+  ingress_cidr_blocks = ["0.0.0.0/0"]
+  ingress_rules      = ["all-all"] 
 }
+
+# resource "aws_security_group" "jenkins-sg" {
+#   name = "jenkins-sg"
+#   ingress {
+#     from_port   = 22
+#     to_port     = 80
+#     protocol    = "tcp"
+#     cidr_blocks = ["0.0.0.0/0"]
+#   }
+
+#   egress {
+#     from_port   = 0
+#     to_port     = 0
+#     protocol    = "-1"
+#     cidr_blocks = ["0.0.0.0/0"]
+#   }
+# }
 
 module "ec2" {
   source                      = "terraform-aws-modules/ec2-instance/aws"
@@ -35,7 +35,7 @@ module "ec2" {
   ami                         = "ami-0b850cf02cc00fdc8"
   instance_type               = "t2.micro"
   #vpc_security_group_ids      = "${module.vpc.jenkins_security_group.jenkins_security_group_id}"
-  vpc_security_group_ids      = [module.vpc.default_security_group_id]
+  vpc_security_group_ids      = [module.vpc.default_security_group_id,module.jenkins_security_group.jenkins_security_group_id]
   subnet_id                   = module.vpc.public_subnets[0]
   associate_public_ip_address = true
   key_name                    = "jenkins-test"
