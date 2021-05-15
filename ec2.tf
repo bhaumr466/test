@@ -10,22 +10,6 @@ module "jsg" {
   ingress_rules      = ["all-all"] 
 }
 
-# resource "aws_security_group" "jenkins-sg" {
-#   name = "jenkins-sg"
-#   ingress {
-#     from_port   = 22
-#     to_port     = 80
-#     protocol    = "tcp"
-#     cidr_blocks = ["0.0.0.0/0"]
-#   }
-
-#   egress {
-#     from_port   = 0
-#     to_port     = 0
-#     protocol    = "-1"
-#     cidr_blocks = ["0.0.0.0/0"]
-#   }
-# }
 
 module "ec2" {
   source                      = "terraform-aws-modules/ec2-instance/aws"
@@ -34,7 +18,7 @@ module "ec2" {
   instance_count              = 1
   ami                         = "ami-0b850cf02cc00fdc8"
   instance_type               = "t2.micro"
-  vpc_security_group_ids      = [module.jsg.jsg_id]
+  vpc_security_group_ids      = var.jsg.jsg_id
   #vpc_security_group_ids      = [module.vpc.default_security_group_id]
   
   subnet_id                   = module.vpc.public_subnets[0]
@@ -54,8 +38,5 @@ module "ec2" {
 
   tags = {
     created_by  = "Terraform"
-    #name        = "${var.env}_${var.app_name}_vpc"
-    #environment = var.env
-    #project     = var.app_name
   }
 }
